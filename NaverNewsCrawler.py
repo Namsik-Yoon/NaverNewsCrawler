@@ -12,7 +12,7 @@ except:
     get_ipython().system('pip install beautifulsoup4')
     from bs4 import BeautifulSoup
 
-class Crawler(object):
+class Crawler:
     def __init__(self):
         self.client_id = input('client ID : ')
         self.client_secret = input('client secret : ')
