@@ -26,7 +26,7 @@ class Crawler(object):
             assert type(n_contents) is int, '정수값이 필요합니다.'
         start = 1
         df = pd.DataFrame(columns=['title','contents','date'])
-        while True
+        while True:
             url = f"https://openapi.naver.com/v1/search/news.{encode_type}?query={search_word}&display={str(max_display)}&start={str(start)}&sort={sort}"
             headers = {'X-Naver-Client-Id' : self.client_id,
                'X-Naver-Client-Secret':self.client_secret
