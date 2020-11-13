@@ -1,4 +1,4 @@
-# NaverNewsCrawler
+# Naver News Crawler
 
 이 크롤러는 개인적인 학습용으로 만들어졌습니다.
 
