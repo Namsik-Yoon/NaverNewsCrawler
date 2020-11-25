@@ -54,3 +54,5 @@ class Crawler:
     def get_df(self):
         return self.result
 
+if __name__ == '__main__':
+    crawl = Crawler()
