@@ -19,13 +19,15 @@ class Crawler:
         if n_contents!=None:
             assert type(n_contents) is int, '정수값이 필요합니다.'
         start = 1
-        df = pd.DataFrame(columns=['title','contents','date'])
+        i = 0
+        df = pd.DataFrame(columns=['title','contents'])
         while True:
-            url = f"https://openapi.naver.com/v1/search/news.{encode_type}?query={search_word}&display={str(max_display)}&start={str(start)}&sort={sort}"
+            url = f"https://openapi.naver.com/v1/search/news.{self.encode_type}?query={self.search_word}&display={str(self.max_display)}&start={str(start)}&sort={self.sort}"
             headers = {'X-Naver-Client-Id' : self.client_id,
                'X-Naver-Client-Secret':self.client_secret
                }
             r = requests.get(url, headers=headers)
+            if len(df) > i:break
             try:links = [x['link'] for x in r.json()['items'] if 'naver' in x['link']]
             except KeyError:break
             for link in links:
@@ -34,7 +36,8 @@ class Crawler:
                     if i==n_contents:
                         break
                 try:
-                    req = requests.get(link)
+                    user_agent = {'User-Agent':'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
+                    req = requests.get(link, headers=user_agent)
                     html_parser = BeautifulSoup(req.content,'html.parser')
                     title = html_parser.select('h3#articleTitle')[0].text
                     contents = html_parser.select('#articleBodyContents')[0].get_text().replace('\n', "")
@@ -42,7 +45,8 @@ class Crawler:
                     contents = contents[:contents.find('▶')]
                     df.loc[i] = [title,contents]
                     i+=1
-                except IndexError:continue
+                except IndexError:
+                    continue
             start+=1
         self.result = df
     
