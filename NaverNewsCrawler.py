@@ -27,13 +27,13 @@ class Crawler:
                'X-Naver-Client-Secret':self.client_secret
                }
             r = requests.get(url, headers=headers)
-            if len(df) > i:break
+            if i > n_contents:break
             try:links = [x['link'] for x in r.json()['items'] if 'naver' in x['link']]
             except KeyError:break
             for link in links:
                 if i%100==0:print(i)
                 if n_contents != None:
-                    if i==n_contents:
+                    if i>n_contents:
                         break
                 try:
                     user_agent = {'User-Agent':'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
