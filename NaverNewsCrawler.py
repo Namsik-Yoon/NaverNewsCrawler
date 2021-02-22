@@ -1,23 +1,18 @@
 import requests
 import pandas as pd
-try:
-    from bs4 import BeautifulSoup
-except:
-    get_ipython().system('pip install beautifulsoup4')
-    from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup 
 
 class Crawler:
     def __init__(self):
         self.client_id = input('client ID : ')
         self.client_secret = input('client secret : ')
         self.search_word = input('검색 단어 : ')
+        self.n_contents = int(input('검색 페이지 수 : '))
         self.encode_type = 'json'
         self.max_display = 100
         self.sort = 'sim'
 
-    def crawling(self,n_contents=None):
-        if n_contents!=None:
-            assert type(n_contents) is int, '정수값이 필요합니다.'
+    def crawling(self):
         start = 1
         i = 0
         df = pd.DataFrame(columns=['title','contents'])
@@ -27,13 +22,13 @@ class Crawler:
                'X-Naver-Client-Secret':self.client_secret
                }
             r = requests.get(url, headers=headers)
-            if i > n_contents:break
+            if i > self.n_contents:break
             try:links = [x['link'] for x in r.json()['items'] if 'naver' in x['link']]
             except KeyError:break
             for link in links:
                 if i%100==0:print(i)
-                if n_contents != None:
-                    if i>n_contents:
+                if self.n_contents != None:
+                    if i>self.n_contents:
                         break
                 try:
                     user_agent = {'User-Agent':'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
@@ -60,3 +55,5 @@ class Crawler:
 
 if __name__ == '__main__':
     crawl = Crawler()
+    crawl.crawling()
+    crawl.save()

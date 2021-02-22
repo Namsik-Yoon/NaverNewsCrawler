@@ -10,3 +10,10 @@
 ## 안내
 네이버 오픈API의 Client ID 및 Secret을 필요로하며 해당 정보는 https://developers.naver.com/products/datalab/ 에서 발급받을 수 있습니다.
 출력값은 관련도 순으로 저장이 되며 해당 파일은 csv형식으로 저장이 됩니다.
+
+How to Use
+```
+git clone https://github.com/Namsik-Yoon/NaverNewsCrawler.git
+pip install -r requirements.txt
+python NaverNewsCrawler.py
+```
