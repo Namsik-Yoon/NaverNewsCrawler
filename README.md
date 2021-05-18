@@ -3,7 +3,7 @@
 이 크롤러는 개인적인 학습용으로 만들어졌습니다.
 
 이 크롤러는 네이버API를 이용하여 검색어 기반 네이버 포탈 기사를 크롤링해주는 크롤러입니다.
-크롤링할수있는 기사의 양은 네이버API의 한도에 따라서 달라지며 문제가 될시 삭제하겠습니다.
+크롤링할수있는 기사의 양은 네이버API의 한도에 따라서 달라질 수 있습니다.
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FNamsik-Yoon%2FNaverNewsCrawler&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
